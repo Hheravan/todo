@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.telus.demo.grpc.todo";
+option java_outer_classname = "TodoProto";
+
+service TodoService {
+  rpc CreateTodo (CreateTodoRequest) returns (TodoResponse);
+  rpc GetTodo (GetTodoRequest) returns (TodoResponse);
+  rpc UpdateTodo (UpdateTodoRequest) returns (TodoResponse);
+  rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse);
+  rpc ListTodos (ListTodosRequest) returns (ListTodosResponse);
+}
+
+message Todo {
+  int64 id = 1;
+  string description = 2;
+  bool completionStatus = 3;
+}
+
+message CreateTodoRequest {
+  string description = 1;
+  bool completionStatus = 2;
+}
+
+message GetTodoRequest {
+  int64 id = 1;
+}
+
+message UpdateTodoRequest {
+  int64 id = 1;
+  string description = 2;
+  bool completionStatus = 3;
+}
+
+message DeleteTodoRequest {
+  int64 id = 1;
+}
+
+message ListTodosRequest {}
+
+message TodoResponse {
+  Todo todo = 1;
+}
+
+message DeleteTodoResponse {
+  bool success = 1;
+}
+
+message ListTodosResponse {
+  repeated Todo todos = 1;
+}
